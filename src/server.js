@@ -2,6 +2,12 @@ import { join } from "pathModule";
 import { serveFile } from "serveFileModule";
 
 import json from "./helper-functions/json.js";
+import dbNewTables from "./database/table.js";
+
+import compile from "./routes/table.js";
+
+// sets up tables for database
+dbNewTables();
 
 // Checks if the file exists or not
 async function isFile(filepath) {
@@ -30,21 +36,6 @@ async function serveStaticFiles(req, pathname) {
   }
 }
 
-// async function test(_ctx){
-//   return await json("Test done");
-// }
-
-const routingTable = [
-  //   {method: "GET", path: "/test/:id", handler: test},
-];
-
-// caches the table for speed and cleaness
-const compile = routingTable.map((r) => ({
-  method: r.method.toUpperCase(),
-  pattern: new URLPattern({ pathname: r.path }),
-  handler: r.handler,
-}));
-
 async function server(req) {
   const url = new URL(req.url);
   const pathname = url.pathname;
@@ -55,7 +46,6 @@ async function server(req) {
   if (staticFile != null) {
     return staticFile;
   }
-
   // Routes the request with pathname and method
   for (const r of compile) {
     if (r.method !== method) continue;
