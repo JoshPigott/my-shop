@@ -1,8 +1,8 @@
 import { join } from "pathModule";
 import { serveFile } from "serveFileModule";
 
-import json from "./helper-functions/json.js";
-import dbNewTables from "./database/table.js";
+import json from "./utils/json.js";
+import dbNewTables from "./database/schema.js";
 
 import compile from "./routes/table.js";
 
@@ -56,7 +56,8 @@ async function server(req) {
 
     return await r.handler({ req, url, params });
   }
-  return json({ error: `${pathname} was not found` });
+  console.log(`${pathname} was not found`);
+  return json({ error: `Not found` }, { status: 404 });
 }
 
 function safeServer(req) {
@@ -65,7 +66,7 @@ function safeServer(req) {
   } // makes sure errors never leak
   catch (err) {
     console.log(err);
-    return json({ error: err }, { status: 400 });
+    return json({ error: "Somthing went wrong" }, { status: 500 });
   }
 }
 

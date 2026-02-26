@@ -7,6 +7,8 @@
 - Adding items
 - Checking if the stock is available
 - Adding and Remove stock
+- A cart to check track of the items
+- A buy options
 
 ## Requirements
 
@@ -22,35 +24,46 @@
 ```text
 ├── deno.json
 ├── deno.lock
+├── flow.md
 ├── README.md
 │
 ├── .vscode
 │   └── settings.json
 │
+├── data
+│   ├── .gitkeep
+│   └── database
+│
 ├── public
-│   └── index.html
-│ 
-├── src 
-│   ├── server.js
-│   │
-│   ├── database
-│   │   ├── cart.js 
-│   │   ├── items.js
-│   │   ├── stock.js
-│   │   └── table.js
-│   │ 
-│   ├── handlers
-│   │   ├── add-stock.js
-│   │   ├── get-items.js
-│   │   ├── in-stock.js
-│   │   ├── new-item.js
-│   │   └── remove-stock.js
-│   │ 
-│   ├── helper-functions
-│   │   └── json.js
-│   │ 
-│   └── routes
-│   │   └── table.js
+│   ├── index.html
+│   └── setup-session.js
+│
+└── src
+    ├── server.js
+    │
+    ├── database
+    │   ├── cart.js
+    │   ├── connection.js
+    │   ├── items.js
+    │   ├── schema.js
+    │   ├── sessions.js
+    │   └── stock.js
+    │
+    ├── handlers
+    │   ├── cart.js
+    │   ├── items.js
+    │   ├── new-session.js
+    │   └── stock.js
+    │
+    ├── routes
+    │   └── table.js
+    │
+    ├── services
+    │   └── sessions.js
+    │
+    └── utils
+        ├── in-stock.js
+        └── json.js
 ```
 
 - I am going to make an online shop
@@ -63,9 +76,14 @@
 - a current shopping cart
 - as long as I have got cute pictures it will be okay
 
-## Commit
-
 ## Plan
 
 - Add a shopping cart
+- Make some handlers for the cart
+- Draw the flow of the app out
+
 - Think about the filters
+  - By category
+  - By price high to low
+  - By price low to high
+  - Rating
