@@ -21,11 +21,11 @@ async function isFile(filepath) {
 
 async function serveStaticFiles(req, pathname) {
   const currworkingDir = Deno.cwd();
-  const filepath = join(currworkingDir, "/public", pathname);
+  const filepath = join(currworkingDir, "/src/public", pathname);
 
   // returns a default of index.html
   if (pathname === "/") {
-    return await serveFile(req, join(currworkingDir, "/public/index.html"));
+    return await serveFile(req, join(currworkingDir, "src/public/index.html"));
   }
   // serves the static file
   if (await isFile(filepath)) {

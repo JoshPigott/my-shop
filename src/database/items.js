@@ -17,8 +17,9 @@ export function dbAddItem(item) {
 }
 
 // Gets all the items with all the data of each item
-export function dbGetItems() {
-  const items = db.query(`SELECT * FROM items`);
+export function dbGetItems(querryMeassage, params) {
+  const items = db.query(querryMeassage, params);
+  console.log("Items:", items);
   return items;
 }
 

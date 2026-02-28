@@ -9,6 +9,7 @@
 - Adding and Remove stock
 - A cart to check track of the items
 - A buy options
+- filters
 
 ## Requirements
 

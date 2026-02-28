@@ -39,6 +39,7 @@
 
 ## Notes
 
+- I will need to make a header and footer later on
 - I will need to clear their cart once their session runs out
 - When you reload the stite after session time out it does not make a new
   session
