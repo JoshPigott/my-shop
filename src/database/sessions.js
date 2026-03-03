@@ -1,9 +1,9 @@
 import db from "./connection.js";
 
 export function dbCreateSession(sessionId) {
-  db.query("INSERT INTO sessions (sessionId) VALUES(?)", [sessionId]);
+  db.prepare("INSERT INTO sessions (sessionId) VALUES(?)").run([sessionId]);
 }
 
 export function dbDeleteSession(sessionId) {
-  db.query("DELETE FROM sessions WHERE sessionId=?", [sessionId]);
+  db.prepare("DELETE FROM sessions WHERE sessionId=?").run([sessionId]);
 }

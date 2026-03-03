@@ -1,10 +1,10 @@
 import { createSession } from "../services/sessions.js";
-import { dbCreateNewCart } from "../database/cart.js";
+import { dbCreateNewWatchList } from "../database/watch-list.js";
 
 function newSession(_ctx) {
   const sessionId = createSession();
-  // Create a cart for the user
-  dbCreateNewCart(sessionId);
+  // Create a watch list for the user
+  dbCreateNewWatchList(sessionId);
   console.log("session created:", sessionId);
   return new Response(null, {
     status: 204,

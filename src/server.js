@@ -1,12 +1,12 @@
-import { join } from "pathModule";
-import { serveFile } from "serveFileModule";
+import { join } from "@std/path";
+import { serveFile } from "@std/http/file-server";
 
 import json from "./utils/json.js";
 import dbNewTables from "./database/schema.js";
 
-import compile from "./routes/table.js";
+import compile from "./routes/index.js";
 
-// sets up tables for database
+// sets up tables for databasehttp://localhost:8000/index.html
 dbNewTables();
 
 // Checks if the file exists or not
@@ -40,6 +40,7 @@ async function server(req) {
   const url = new URL(req.url);
   const pathname = url.pathname;
   const method = req.method;
+  console.log(`There has been a request from ${pathname}`);
 
   // If a static file it gets served
   const staticFile = await serveStaticFiles(req, pathname);

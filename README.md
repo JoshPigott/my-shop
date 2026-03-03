@@ -1,14 +1,12 @@
 ## My-Shop
 
-- This project recreates a shop
+- This project recreates real estate webstite
 
 ## Features
 
-- Adding items
-- Checking if the stock is available
-- Adding and Remove stock
-- A cart to check track of the items
-- A buy options
+- Adding listings
+- A watch-list to check track of the listings
+- A buy option
 - filters
 
 ## Requirements
@@ -23,6 +21,7 @@
 ## File structure
 
 ```text
+.
 ├── deno.json
 ├── deno.lock
 ├── flow.md
@@ -35,56 +34,56 @@
 │   ├── .gitkeep
 │   └── database
 │
-├── public
-│   ├── index.html
-│   └── setup-session.js
-│
 └── src
     ├── server.js
     │
     ├── database
-    │   ├── cart.js
     │   ├── connection.js
-    │   ├── items.js
+    │   ├── listings.js
     │   ├── schema.js
     │   ├── sessions.js
-    │   └── stock.js
+    │   └── watch-list.js
     │
     ├── handlers
-    │   ├── cart.js
-    │   ├── items.js
+    │   ├── listings.js
     │   ├── new-session.js
-    │   └── stock.js
+    │   └── watch-list.js
+    │
+    ├── public
+    │   ├── index.html
+    │   ├── setup-session.js
+    │   ├── watch-list.html
+    │   │
+    │   └── assets
+    │       └── listings-pics
+    │           ├── bella-italia.jpg
+    │           ├── big-sky.jpg
+    │           ├── focal-point.jpg
+    │           ├── grandeur.jpg
+    │           ├── la-belle-vie.jpg
+    │           ├── lifestyle-collective.jpg
+    │           ├── maison-du-soleil.jpg
+    │           ├── safehaven.jpg
+    │           ├── sky-view.jpg
+    │           ├── substance.jpg
+    │           ├── the-beacon.jpg
+    │           ├── town-country.jpg
+    │           └── watercolours.jpg
     │
     ├── routes
-    │   └── table.js
+    │   └── index.js
     │
     ├── services
     │   └── sessions.js
     │
-    └── utils
-        ├── in-stock.js
-        └── json.js
+    ├── utils
+    │   ├── html-response.js
+    │   └── json.js
+    │
+    └── views
+        ├── listing-template.js
+        ├── listings-page-template.js
+        └── listings-template.js
 ```
 
-- I am going to make an online shop
-- lululemon their home page imteas with their price
-
-- a cost
-- filter - like the price category ect
-- change color
-- pitrues
-- a current shopping cart
-- as long as I have got cute pictures it will be okay
-
-## Plan
-
-- Add a shopping cart
-- Make some handlers for the cart
-- Draw the flow of the app out
-
-- Think about the filters
-  - By category
-  - By price high to low
-  - By price low to high
-  - Rating
+"sqlite": "https://deno.land/x/sqlite@v3.9.1/mod.ts"
