@@ -7,7 +7,7 @@ import dbNewTables from "./database/schema.js";
 import { deleteExpiredSessions } from "./services/sessions.js";
 import json from "./utils/json.js";
 
-// sets up tables for databasehttp://localhost:8000/index.html
+// sets up tables for database
 dbNewTables();
 deleteExpiredSessions();
 

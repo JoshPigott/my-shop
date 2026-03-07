@@ -15,15 +15,8 @@ export async function serveStaticFiles(req, pathname, subdomain) {
   const currworkingDir = Deno.cwd();
   const filepath = join(currworkingDir, "/src/public", pathname);
 
-  // returns a default depending on subdomain
-  if (pathname === "/") {
-    if (subdomain === "admin") {
-      return await serveFile(
-        req,
-        join(currworkingDir, "src/public/login.html"),
-      );
-    }
-    // default
+  // returns a default depending on subdomain (admin subdomain is server side rendered)
+  if (pathname === "/" && subdomain !== "admin") {
     return await serveFile(req, join(currworkingDir, "src/public/index.html"));
   }
 

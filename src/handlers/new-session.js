@@ -8,9 +8,8 @@ function newSession(_ctx) {
   console.log("session created:", sessionId);
   return new Response(null, {
     status: 204,
-    header: {
-      "Set-Cookies":
-        `sessionId=${sessionId}; HttpOnly; SameSite=Scrict; path=/`,
+    headers: {
+      "Set-Cookie": `sessionId=${sessionId}; HttpOnly; SameSite=Strict; path=/`,
     },
   });
 }

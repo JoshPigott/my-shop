@@ -21,7 +21,6 @@
 ## File structure
 
 ```text
-.
 ├── deno.json
 ├── deno.lock
 ├── flow.md
@@ -38,6 +37,7 @@
     ├── server.js
     │
     ├── database
+    │   ├── admin-accounts.js
     │   ├── connection.js
     │   ├── listings.js
     │   ├── schema.js
@@ -45,9 +45,16 @@
     │   └── watch-list.js
     │
     ├── handlers
+    │   ├── account.js
+    │   ├── admin.js
     │   ├── listings.js
     │   ├── new-session.js
     │   └── watch-list.js
+    │
+    ├── middleware
+    │   ├── get-subdomain.js
+    │   ├── protect-routes.js
+    │   └── server-static-files.js
     │
     ├── public
     │   ├── index.html
@@ -74,6 +81,7 @@
     │   └── index.js
     │
     ├── services
+    │   ├── auth.js
     │   └── sessions.js
     │
     ├── utils
@@ -81,9 +89,11 @@
     │   └── json.js
     │
     └── views
+        ├── admin-login-template.js
+        ├── admin-page-template.js
+        ├── create-listing-template.js
         ├── listing-template.js
         ├── listings-page-template.js
         └── listings-template.js
 ```
 
-"sqlite": "https://deno.land/x/sqlite@v3.9.1/mod.ts"

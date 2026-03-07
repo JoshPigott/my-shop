@@ -1,10 +1,13 @@
 import * as bcrypt from "@da/bcrypt";
 import { updateLoginStatus } from "../services/sessions.js";
+import { adminLoginTemplate } from "../views/admin-login-template.js";
+import { createListingTemplate } from "../views/create-listing-template.js";
 import {
   dbAddAccount,
   dbGetHashedPassword,
   dbUniqueUsername,
 } from "../database/admin-accounts.js";
+import htmlResponse from "../utils/html-response.js";
 
 // Logs in user in if username and password are valid
 export async function isValidPassword(ctx) {
@@ -17,9 +20,12 @@ export async function isValidPassword(ctx) {
 
   if (valid) {
     updateLoginStatus(ctx.req);
-    return new Response("Valid credentials", { status: 200 });
+    const html = createListingTemplate();
+    return htmlResponse(html, { status: 200 });
   } else {
-    return new Response("Invalid credentials", { status: 401 });
+    const html = adminLoginTemplate("Invalid credentials");
+    // I can't return status of 401 because it treats it as an error and fails to load the html
+    return htmlResponse(html, { status: 200 });
   }
 }
 
@@ -43,8 +49,9 @@ export async function newAccount(ctx) {
   // Checks if username is valid
   const valid = isValidUsername(username);
   if (!valid) {
-    console.log("Username invalid");
-    return new Response("Invalid Credentials", { status: 401 });
+    const html = adminLoginTemplate("Invalid credentials");
+    // I can't return status of 401 because it treats it as an error and fails to load the html
+    return htmlResponse(html, { status: 200 });
   }
 
   const salt = await bcrypt.genSalt(8);
@@ -52,5 +59,6 @@ export async function newAccount(ctx) {
 
   dbAddAccount(username, hashedPassword);
   updateLoginStatus(ctx.req);
-  return new Response("Account has been made!", { status: 200 });
+  const html = createListingTemplate();
+  return htmlResponse(html, { status: 200 });
 }

@@ -23,7 +23,7 @@ export function dbGetLoginStatus(sessionId) {
   const res = db.prepare("SELECT login FROM sessions WHERE sessionId=?").get(
     sessionId,
   );
-  return res.login;
+  return res?.login;
 }
 
 export function dbGetAllSessions() {

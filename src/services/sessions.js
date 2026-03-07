@@ -41,7 +41,7 @@ export function deleteExpiredSessions() {
 
 // Gets cookies and changes the format from an array into an object
 function getCookies(req) {
-  const cookiesString = req.headers.get("cookie");
+  const cookiesString = req?.headers.get("cookie");
   if (!cookiesString) return false;
 
   // Breaks cookies into individual cookies
