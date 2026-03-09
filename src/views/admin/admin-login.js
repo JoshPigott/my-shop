@@ -1,4 +1,4 @@
-export function adminLoginTemplate(message = "") {
+export function adminLoginView(message = "") {
   return /*html*/ `
   <div class="login">
     <form class="login__form" hx-post="/login" hx-target=".login" hx-swap="outerHTML">

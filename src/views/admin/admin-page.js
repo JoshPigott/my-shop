@@ -1,7 +1,7 @@
-import { adminLoginTemplate } from "./admin-login-template.js";
-import { createListingTemplate } from "./create-listing-template.js";
+import { adminLoginView } from "./admin-login.js";
+import { createListingView } from "../listings/create-listing.js";
 
-export function adminPage(loginStatus) {
+export function adminPageView(loginStatus) {
   return /*html*/ `
   <!DOCTYPE html>
   <html lang="en">
@@ -16,7 +16,7 @@ export function adminPage(loginStatus) {
       ></script>
     </head>
     <body>
-      ${loginStatus ? createListingTemplate() : adminLoginTemplate()}
+      ${loginStatus ? createListingView() : adminLoginView()}
       
       <script src="./setup-session.js" type="module"></script>
     </body>

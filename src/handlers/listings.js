@@ -4,8 +4,10 @@ import {
   dbGetListing,
   dbGetListings,
 } from "../database/listings.js";
-import listingsTemplate from "../views/listings-template.js";
-import listingPageTemplate from "../views/listings-page-template.js";
+import { dbIsInWatchlist } from "../database/watchlist.js";
+import listingsView from "../views/listings/listings.js";
+import listingPageView from "../views/listings/listings-page.js";
+import { getSession } from "../services/sessions.js";
 import htmlResponse from "../utils/html-response.js";
 
 // Creates an listing adding it to the database
@@ -67,16 +69,20 @@ export function getListings(ctx) {
   const querryMeassage = getQuerryMeassage(conditions, order);
 
   const listings = dbGetListings(querryMeassage, params);
-  const html = listingsTemplate(listings);
+  const html = listingsView(listings);
   // I will return so format html here later on
   return htmlResponse(html, { status: 200 });
 }
 
-export function listingPage(ctx) {
+// Gets the page for an individual listing
+export function getListingPage(ctx) {
   const listingId = ctx.params.listingId;
-  console.log(listingId);
+  const sessionId = getSession(ctx.req);
+
+  const inWatchlist = dbIsInWatchlist(sessionId, listingId);
   const listing = dbGetListing(listingId);
-  const html = listingPageTemplate(listing);
+
+  const html = listingPageView(listing, inWatchlist);
   return htmlResponse(html, { status: 200 });
 }
 

@@ -89,11 +89,10 @@
     │   └── json.js
     │
     └── views
-        ├── admin-login-template.js
-        ├── admin-page-template.js
-        ├── create-listing-template.js
-        ├── listing-template.js
-        ├── listings-page-template.js
-        └── listings-template.js
+        ├── admin-login.js
+        ├── admin-page.js
+        ├── create-listing.js
+        ├── listing.js
+        ├── listings-page.js
+        └── listings.js
 ```
-

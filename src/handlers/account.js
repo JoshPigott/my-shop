@@ -1,7 +1,7 @@
 import * as bcrypt from "@da/bcrypt";
 import { updateLoginStatus } from "../services/sessions.js";
-import { adminLoginTemplate } from "../views/admin-login-template.js";
-import { createListingTemplate } from "../views/create-listing-template.js";
+import { adminLoginView } from "../views/admin/admin-login.js";
+import { createListingView } from "../views/listings/create-listing.js";
 import {
   dbAddAccount,
   dbGetHashedPassword,
@@ -20,10 +20,10 @@ export async function isValidPassword(ctx) {
 
   if (valid) {
     updateLoginStatus(ctx.req);
-    const html = createListingTemplate();
+    const html = createListingView();
     return htmlResponse(html, { status: 200 });
   } else {
-    const html = adminLoginTemplate("Invalid credentials");
+    const html = adminLoginView("Invalid credentials");
     // I can't return status of 401 because it treats it as an error and fails to load the html
     return htmlResponse(html, { status: 200 });
   }
@@ -49,7 +49,7 @@ export async function newAccount(ctx) {
   // Checks if username is valid
   const valid = isValidUsername(username);
   if (!valid) {
-    const html = adminLoginTemplate("Invalid credentials");
+    const html = adminLoginView("Invalid credentials");
     // I can't return status of 401 because it treats it as an error and fails to load the html
     return htmlResponse(html, { status: 200 });
   }
@@ -59,6 +59,6 @@ export async function newAccount(ctx) {
 
   dbAddAccount(username, hashedPassword);
   updateLoginStatus(ctx.req);
-  const html = createListingTemplate();
+  const html = createListingView();
   return htmlResponse(html, { status: 200 });
 }

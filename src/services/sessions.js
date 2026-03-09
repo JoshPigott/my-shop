@@ -4,6 +4,7 @@ import {
   dbGetAllSessions,
   dbUpdateLoginStatus,
 } from "../database/sessions.js";
+import { dbDeleteWatchlist } from "../database/watchlist.js";
 
 // Creates a session in the data with an expiry data
 export function createSession() {
@@ -12,6 +13,7 @@ export function createSession() {
   const expiryTime = Date.now() + sixHours;
   dbCreateSession(sessionId, expiryTime);
   setTimeout(() => {
+    dbDeleteWatchlist(sessionId);
     dbDeleteSession(sessionId);
     console.log(`session ${sessionId} has been deleted`);
   }, sixHours);
@@ -27,11 +29,13 @@ export function deleteExpiredSessions() {
   sessions.forEach((session) => {
     // The session has expiried
     if (session.expiryTime <= currTime) {
+      dbDeleteWatchlist(session.sessionId);
       dbDeleteSession(session.sessionId);
       console.log(`session ${session.sessionId} has been deleted`);
     } else {
       const timeTillExpiry = session.expiryTime - currTime;
       setTimeout(() => {
+        dbDeleteWatchlist(session.sessionId);
         dbDeleteSession(session.sessionId);
         console.log(`session ${session.sessionId} has been deleted`);
       }, timeTillExpiry);

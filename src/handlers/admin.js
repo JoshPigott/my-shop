@@ -1,9 +1,9 @@
-import { adminPage } from "../views/admin-page-template.js";
+import { adminPageView } from "../views/admin/admin-page.js";
 import htmlResponse from "../utils/html-response.js";
 import { getLoginStatus } from "../services/auth.js";
 
-export function getAdminPage(ctx) {
+export function adminPage(ctx) {
   const loginStatus = getLoginStatus(ctx.req);
-  const html = adminPage(loginStatus);
+  const html = adminPageView(loginStatus);
   return htmlResponse(html, { status: 200 });
 }
