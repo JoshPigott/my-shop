@@ -18,6 +18,10 @@
 
 - This will come later once I build the html
 
+## Note for real estate agents
+
+- Your username must start with agent
+
 ## File structure
 
 ```text
@@ -42,14 +46,14 @@
     │   ├── listings.js
     │   ├── schema.js
     │   ├── sessions.js
-    │   └── watch-list.js
+    │   └── watchlist.js
     │
     ├── handlers
     │   ├── account.js
     │   ├── admin.js
     │   ├── listings.js
     │   ├── new-session.js
-    │   └── watch-list.js
+    │   └── watchlist.js
     │
     ├── middleware
     │   ├── get-subdomain.js
@@ -59,7 +63,7 @@
     ├── public
     │   ├── index.html
     │   ├── setup-session.js
-    │   ├── watch-list.html
+    │   ├── watchlist.html
     │   │
     │   └── assets
     │       └── listings-pics
@@ -82,6 +86,7 @@
     │
     ├── services
     │   ├── auth.js
+    │   ├── get-listings.js
     │   └── sessions.js
     │
     ├── utils
@@ -89,10 +94,48 @@
     │   └── json.js
     │
     └── views
-        ├── admin-login.js
-        ├── admin-page.js
-        ├── create-listing.js
         ├── listing.js
-        ├── listings-page.js
-        └── listings.js
+        │
+        ├── admin
+        │   ├── admin-login.js
+        │   └── admin-page.js
+        │
+        ├── listings
+        │   ├── create-listing.js
+        │   ├── listings-page.js
+        │   └── listings.js
+        │
+        └── watchlist
+            └── watchlist-listing.js
 ```
+
+# Key Logic
+
+## Flow
+
+- HTMX request → middleware → router → handler → service → database → handler →
+  view → HTML response
+- Note: Not all requests follow this flow (e.g. some do not use a service
+  layer).
+
+## Admin
+
+- Admin is accessed via a subdomain.
+- Users can sign up and log in.
+- After logging in, agents can create new property listings.
+- This feature is intended for real estate agents to add listings.
+
+## Watchlist
+
+- Allows users to save listings to view later.
+
+## Website Flow
+
+- Users land on the homepage displaying all listings.
+- Clicking a listing opens a page for that individual property.
+- On this page, users can add or remove the listing from their watchlist.
+- The watchlist can be accessed from the homepage.
+
+## Known Problems
+
+- Watchlists are session-based. When the session expires, the watchlist is lost.
