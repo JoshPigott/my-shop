@@ -6,6 +6,7 @@ export function isLogin(handler) {
   return async (ctx) => {
     const login = getLoginStatus(ctx.req);
     if (login === false) {
+      console.log("Unauthorised access to this route");
       return new Response("Unauthorised access", { status: 401 });
     }
     return await handler(ctx);

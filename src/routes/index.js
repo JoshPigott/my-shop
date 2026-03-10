@@ -16,9 +16,6 @@ const routingTableAdmin = [
   {method: "POST",   path: "/new-account",                   handler: newAccount},
   {method: "POST",   path: "/create-listing",                handler: isLogin(createListing)},
   // Maybe I add a remove listing thing here in the future
-  // {method: "GET",    path: "/get-listings",                  handler: isLogin(getListings)}, 
-  // {method: "GET",    path: "/get-listing-page/:listingId",   handler: isLogin(getListingPage)},
-  // {method: "GET",    path: "/buy/:listingId",                handler: isLogin(buy)}, 
 ];
 
 // Public routes

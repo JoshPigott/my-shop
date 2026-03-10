@@ -8,20 +8,34 @@ import htmlResponse from "../utils/html-response.js";
 
 // Creates an listing adding it to the database
 export async function createListing(ctx) {
-  const body = await ctx.req.json();
+  const formData = await ctx.req.formData();
+
   // listing info
   const id = crypto.randomUUID();
-  const name = body.name;
-  const description = body.description;
-  const price = body.price;
-  const rating = body.rating;
-  const category = body.category;
-  const image = body.image;
+  const name = formData?.get("name");
+  const description = formData?.get("description");
+  const price = formData?.get("price");
+  const rating = formData?.get("rating");
+  const category = formData?.get("category");
+  const image = formData?.get("image");
+
+  console.log("name:", name);
+  console.log("description:", description);
+  console.log("price:", price);
+  console.log("rating:", rating);
+  console.log("category:", category);
+  console.log("image:", image);
 
   const listing = { id, name, description, price, rating, category, image };
-  dbAddListing(listing);
-
-  return new Response({ status: 201 });
+  try {
+    dbAddListing(listing);
+    return htmlResponse(`Listing Added`, { status: 201 });
+  } catch (_err) {
+    return htmlResponse(
+      `Failed to Add Listing (Make sure listing Name is unique)`,
+      { status: 200 },
+    );
+  }
 }
 
 // Gets specific listings in the database with their data
