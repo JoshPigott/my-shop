@@ -1,12 +1,8 @@
-import {
-  dbAddListing,
-  dbBuy,
-  dbGetListing,
-  dbGetListings,
-} from "../database/listings.js";
+import { dbAddListing, dbBuy, dbGetListing } from "../database/listings.js";
 import { dbIsInWatchlist } from "../database/watchlist.js";
 import listingsView from "../views/listings/listings.js";
 import listingPageView from "../views/listings/listings-page.js";
+import { getListingsService } from "../services/get-listings.js";
 import { getSession } from "../services/sessions.js";
 import htmlResponse from "../utils/html-response.js";
 
@@ -28,47 +24,11 @@ export async function createListing(ctx) {
   return new Response({ status: 201 });
 }
 
-// Gets querry meassage
-function getQuerryMeassage(conditions, order) {
-  let querryMeassage = `SELECT * FROM listings`;
-  if (conditions.length > 0) {
-    querryMeassage = querryMeassage + ` WHERE ` + conditions.join(` AND `);
-  }
-  if (order.length > 0) {
-    querryMeassage = querryMeassage + ` ORDER BY ` + order.join(` AND `);
-  }
-  querryMeassage = querryMeassage + ` LIMIT 2`;
-  return querryMeassage;
-}
-
 // Gets specific listings in the database with their data
 export function getListings(ctx) {
   const filters = new URLSearchParams(ctx.url.searchParams);
-  // Whitelist filters so it prevents any input from being enter in (security)
-  const filtersAllowed = ["rating", "category", "status"];
-  const conditions = [];
-  const order = [];
-  const params = [];
+  const listings = getListingsService(filters);
 
-  for (const [key, value] of filters.entries()) { // This is not going to work Object.entries(filters)
-    // filter with ORDER
-    if (key === "price_order") {
-      // Prevents any input from being enter in (security)
-      if (value === "ASC" || value === "DESC") {
-        order.push(`price ${value}`);
-      }
-    } // filter with WHERE
-    else {
-      if (filtersAllowed.includes(key)) {
-        conditions.push(`${key} = ?`);
-        params.push(value);
-      }
-    }
-  }
-
-  const querryMeassage = getQuerryMeassage(conditions, order);
-
-  const listings = dbGetListings(querryMeassage, params);
   const html = listingsView(listings);
   // I will return so format html here later on
   return htmlResponse(html, { status: 200 });
