@@ -7,7 +7,7 @@ export function createListingView() {
      type="text"
      id="name"
      name="name"
-     maxlength="10"
+     maxlength="20"
      required>
     
     <label for="price">Price</label>
