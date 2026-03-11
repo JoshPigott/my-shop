@@ -27,8 +27,7 @@ export async function newAccount(ctx) {
   const username = formData.get("username");
   const password = formData.get("password");
 
-  const valid = registrationService(username, password, ctx.req);
-
+  const valid = await registrationService(username, password, ctx.req);
   if (!valid) {
     const html = adminLoginView("Invalid credentials");
     // I can't return status of 401 because it treats it as an error and fails to load the html

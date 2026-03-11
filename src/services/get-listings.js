@@ -9,7 +9,7 @@ function getQuerryMeassage(conditions, order) {
   if (order.length > 0) {
     querryMeassage = querryMeassage + ` ORDER BY ` + order.join(` AND `);
   }
-  querryMeassage = querryMeassage + ` LIMIT 13`;
+  querryMeassage = querryMeassage + ` LIMIT 14`;
   return querryMeassage;
 }
 
