@@ -23,7 +23,6 @@ header {
   align-items: center;
   gap: 10vw;
   padding: 70px 100px;
-  margin-bottom: 30px;
   background-color: #f2efea;
 }
 header h1 {
@@ -45,7 +44,6 @@ footer {
   align-items: center;
   gap: 10vw;
   padding: 70px 100px;
-  margin-top: 30px;
   background-color: #f2efea;
 }
 
@@ -73,7 +71,7 @@ footer {
   flex-wrap: wrap;
   column-gap: 2vw;
   row-gap: 3vh;
-  margin: 0px 50px;
+  padding: 70px 50px;
 }
 
 .listing-preview {
@@ -91,4 +89,48 @@ footer {
 
 .listing-preview__text h2 {
   font-weight: 600;
+}
+
+/* admin page */
+.login {
+  max-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10vw;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5vh;
+  padding: 70px 100px;
+  font-weight: 600;
+}
+
+.login__buttons {
+  display: flex;
+  gap: 1.5vw;
+}
+
+.login__button {
+  border: none;
+  border-radius: 5px;
+  padding: 4px 8px;
+
+  background-color: #d9cbaf;
+  color: #0f0f0f;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: var(--primary-font);
+}
+
+.login__button:hover {
+  background-color: #c9b98d;
+}
+
+.login__image {
+  max-height: 300px;
+  opacity: 0.4;
 }

@@ -1,7 +1,8 @@
 import { adminLoginView } from "./admin-login.js";
 import { createListingView } from "./create-listing.js";
+import { deleteListingsView } from "./delete-listings.js";
 
-export function adminPageView(loginStatus) {
+export function adminPageView(loginStatus, listings) {
   return /*html*/ `
   <!DOCTYPE html>
   <html lang="en">
@@ -22,13 +23,32 @@ export function adminPageView(loginStatus) {
         <h1>Crown Point Estates</h1>
       </header>
       <main>
-        ${loginStatus ? createListingView() : adminLoginView()}
+        ${loginStatus ? adminMainView(listings) : adminLoginView()}
       </main>
       <footer>
-        <p>For any question or querrys email <a class="footer__email">crownpointestates@gmail.com</a></p>
-      </footer>
+      <div class="footer__description">
+        <h2 class="footer__description">Crown Point Estates</h2>
+        <p>
+          At Crown Point Estates, we specialize in luxury properties and provide
+          unmatched service with meticulous attention to detail.
+        </p>
+      </div>
+      <div class="footer__email">
+        <p>For any question or querrys email</p>
+        <a class="footer__link" href="mailto:crownpointestates@gmail.com"
+        >crownpointestates@gmail.com</a>
+      </div>
+    </footer>
       <script src="./setup-session.js" type="module"></script>
     </body>
   </html>
 `;
+}
+
+function adminMainView(listings) {
+  const html = `
+  ${createListingView()}
+  ${deleteListingsView(listings)}
+  `;
+  return html;
 }

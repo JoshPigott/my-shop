@@ -7,11 +7,17 @@ export function dbAddToWatchlist(sessionId, listingId) {
   );
 }
 
+// Used when user wants to delete listing from watchlist
 export function dbRemoveFromWatchlist(sessionId, listingId) {
   db.prepare(`DELETE FROM watchlist WHERE sessionId=? AND listingId=?`).run(
     sessionId,
     listingId,
   );
+}
+
+// Used when agent deletes listing
+export function dbDeleteListingsById(listingId) {
+  db.prepare(`DELETE FROM watchlist WHERE listingId=?`).run(listingId);
 }
 
 // Returns all the user listings id in their watch list

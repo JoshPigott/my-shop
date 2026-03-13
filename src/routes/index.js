@@ -1,7 +1,7 @@
 // deno-fmt-ignore-file
 
 import newSession from "../handlers/new-session.js";
-import { createListing, getListings, getListingPage, buy }from "../handlers/listings.js";
+import { createListing, getListings, getListingPage, buy, deleteListings }from "../handlers/listings.js";
 import { addToWatchlist, getWatchlist, removeFromWatchlist } from "../handlers/watchlist.js";
 import { isValidPassword, newAccount } from "../handlers/account.js";
 import { adminPage } from "../handlers/admin.js";
@@ -15,7 +15,7 @@ const routingTableAdmin = [
   {method: "POST",   path: "/login",                         handler: isValidPassword},
   {method: "POST",   path: "/new-account",                   handler: newAccount},
   {method: "POST",   path: "/create-listing",                handler: isLogin(createListing)},
-  // Maybe I add a remove listing thing here in the future
+  {method: "DELETE", path: "/delte-listing/:listingId",      handler: isLogin(deleteListings)}
 ];
 
 // Public routes
