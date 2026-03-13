@@ -19,10 +19,15 @@ export function dbAddListing(listing) {
   );
 }
 
-// Gets all the listings with all the data of each listing
+// Gets all the listings with all the data of each listing with filter applied
 export function dbGetListings(querryMeassage, params) {
   const listings = db.prepare(querryMeassage).all(params);
   return listings;
+}
+
+// Returns all listings with no filters appiled
+export function dbGetAllListings() {
+  return db.prepare(`SELECT * FROM listings`).all();
 }
 
 // Get a specific listing data
@@ -39,4 +44,8 @@ export function dbBuy(listingId) {
     `UPDATE listings SET status = 'sold' WHERE id = ? AND status = 'available' RETURNING *`,
   ).run(listingId);
   return updated;
+}
+
+export function dbDeleteListing(listingId) {
+  db.prepare(`DELETE FROM listings WHERE id=?`).run(listingId);
 }

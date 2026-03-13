@@ -15,10 +15,10 @@ function listingPageView(listing, inWatchlist) {
     <body>
       <header>
         <h1>Crown Point Estates</h1>
+        <a href="/index.html" class="header__link">Home</a>
         <a href="watchlist.html" class="header__link">Watch list</a>
       </header>
       <main>
-        <a href="/index.html">Back</a>
         <div>This is an listing</div>
         ${listingFullView(listing)}
         ${
@@ -26,8 +26,19 @@ function listingPageView(listing, inWatchlist) {
   }
       </main>
       <footer>
-        <p>For any question or querrys email <a class="footer__email">crownpointestates@gmail.com</a></p>
-      </footer>
+      <div class="footer__description">
+        <h2 class="footer__description">Crown Point Estates</h2>
+        <p>
+          At Crown Point Estates, we specialize in luxury properties and provide
+          unmatched service with meticulous attention to detail.
+        </p>
+      </div>
+      <div class="footer__email">
+        <p>For any question or querrys email</p>
+        <a class="footer__link" href="mailto:crownpointestates@gmail.com"
+        >crownpointestates@gmail.com</a>
+      </div>
+    </footer>
       <script src="/setup-session.js" type="module"></script>
     </body>
   </html>
