@@ -4,18 +4,18 @@ export function listingFullView(listing) {
     <h2>${listing?.address}</h2>
     <h2>${listing?.area}</h2>
     <h3>${listing?.description}</h3>
-    <img src="/assets/listings-pics/${listing?.image}.jpg" alt="${listing?.name} image">
+    <img src="/assets/listings-pics/${listing?.imageFileName}.jpg" alt="${listing?.name} image">
     <h3>Price: $${listing?.price}</h3>
     <h3>Rating: ${listing?.rating}/10</h3>
   `;
 
   return html;
 }
-
+// A more conise listing
 export function listingView(listing) {
   const html = /*html*/ `
     <a href="/get-listing-page/${listing.id}">
-      <img class=listing-preview__image src="/assets/listings-pics/${listing?.image}.jpg" alt="${listing?.name} image">
+      <img class=listing-preview__image src="/assets/listings-pics/${listing?.imageFileName}.jpg" alt="${listing?.name} image">
     </a>  
     <div class="listing-preview__text">
       <h2>${listing?.name}</h2>

@@ -1,6 +1,7 @@
+import { dbGetAllListings } from "../database/listings.js";
 import { registrationService, verifyLoginService } from "../services/auth.js";
 import { adminLoginView } from "../views/admin/admin-login.js";
-import { createListingView } from "../views/admin/create-listing.js";
+import { adminMainView } from "../views/admin/admin-page.js";
 import htmlResponse from "../utils/html-response.js";
 
 // Logs in user in if username and password are valid
@@ -12,7 +13,8 @@ export async function isValidPassword(ctx) {
   const valid = await verifyLoginService(username, password, ctx.req);
 
   if (valid) {
-    const html = createListingView();
+    const listings = dbGetAllListings();
+    const html = adminMainView(listings);
     return htmlResponse(html, { status: 200 });
   } else {
     const html = adminLoginView("Invalid credentials");
@@ -34,6 +36,7 @@ export async function newAccount(ctx) {
     return htmlResponse(html, { status: 200 });
   }
 
-  const html = createListingView();
+  const listings = dbGetAllListings();
+  const html = adminMainView(listings);
   return htmlResponse(html, { status: 200 });
 }

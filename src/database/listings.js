@@ -4,7 +4,7 @@ import db from "./connection.js";
 export function dbAddListing(listing) {
   db.prepare(
     `INSERT INTO listings (id, name, address, area, description, price,
-     rating, status, category, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+     rating, status, category, imageFileName) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   ).run(
     listing.id,
     listing.name,
@@ -15,8 +15,19 @@ export function dbAddListing(listing) {
     listing.rating,
     "available",
     listing.category,
-    listing.image,
+    listing.imageFileName,
   );
+}
+
+// Returns if listing name is unique or not
+export function dbIsUniqueName(listingName) {
+  const listings = db.prepare(`SELECT * FROM listings WHERE name=?`).all(
+    listingName,
+  );
+  if (listings.length === 0) {
+    return true;
+  }
+  return false;
 }
 
 // Gets all the listings with all the data of each listing with filter applied

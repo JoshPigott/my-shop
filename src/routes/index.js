@@ -15,7 +15,7 @@ const routingTableAdmin = [
   {method: "POST",   path: "/login",                         handler: isValidPassword},
   {method: "POST",   path: "/new-account",                   handler: newAccount},
   {method: "POST",   path: "/create-listing",                handler: isLogin(createListing)},
-  {method: "DELETE", path: "/delte-listing/:listingId",      handler: isLogin(deleteListings)}
+  {method: "DELETE", path: "/delete-listing/:listingId",     handler: isLogin(deleteListings)}
 ];
 
 // Public routes

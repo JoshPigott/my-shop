@@ -1,9 +1,4 @@
-import {
-  dbAddListing,
-  dbBuy,
-  dbDeleteListing,
-  dbGetListing,
-} from "../database/listings.js";
+import { dbBuy, dbDeleteListing, dbGetListing } from "../database/listings.js";
 import {
   dbDeleteListingsById,
   dbIsInWatchlist,
@@ -11,6 +6,7 @@ import {
 import listingsView from "../views/home/listings.js";
 import listingPageView from "../views/listings/listings-page.js";
 import { getListingsService } from "../services/get-listings.js";
+import { createListingService } from "../services/create-listing.js";
 import { getSession } from "../services/sessions.js";
 import htmlResponse from "../utils/html-response.js";
 
@@ -27,7 +23,7 @@ export async function createListing(ctx) {
   const price = formData?.get("price") ?? "By negation";
   const rating = formData?.get("rating") ?? "unable";
   const category = formData?.get("category");
-  const image = formData?.get("image");
+  const image = formData.get("image");
 
   const listing = {
     id,
@@ -38,12 +34,11 @@ export async function createListing(ctx) {
     price,
     rating,
     category,
-    image,
   };
-  try {
-    dbAddListing(listing);
+  const added = await createListingService(listing, image);
+  if (added) {
     return htmlResponse(`Listing Added`, { status: 201 });
-  } catch (_err) {
+  } else {
     return htmlResponse(
       `Failed to Add Listing (Make sure listing Name is unique)`,
       { status: 200 },
@@ -86,11 +81,17 @@ export function buy(ctx) {
   }
 }
 
-export function deleteListings(ctx) {
+export async function deleteListings(ctx) {
+  const fileStoragePath = "./src/public/assets/listings-pics";
   const listingId = ctx.params.listingId;
+  const listing = dbGetListing(listingId);
+
+  // Delete listing image
+  await Deno.remove(`${fileStoragePath}/${listing.imageFileName}.jpg`);
+
   dbDeleteListing(listingId);
-  // Deletes all listings in the watchlist so errors don't happen when rendering
+  // Deletes all listings in watchlists
   dbDeleteListingsById(listingId);
-  const html = /*html*/ `<div>Listing was deleted</div>`;
-  return htmlResponse(html, { status: 200 });
+
+  return htmlResponse({ status: 204 });
 }
