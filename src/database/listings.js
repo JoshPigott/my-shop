@@ -49,14 +49,6 @@ export function dbGetListing(listingId) {
   return listing;
 }
 
-// Upates status to sold
-export function dbBuy(listingId) {
-  const updated = db.prepare(
-    `UPDATE listings SET status = 'sold' WHERE id = ? AND status = 'available' RETURNING *`,
-  ).run(listingId);
-  return updated;
-}
-
 export function dbDeleteListing(listingId) {
   db.prepare(`DELETE FROM listings WHERE id=?`).run(listingId);
 }

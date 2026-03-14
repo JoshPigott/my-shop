@@ -20,7 +20,7 @@ export function dbUniqueUsername(username) {
   const res = db.prepare(`SELECT * FROM accounts WHERE username=?`).get(
     username,
   );
-  // account is unique
+  // Account is unique
   if (res === undefined) {
     return true;
   }

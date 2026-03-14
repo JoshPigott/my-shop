@@ -65,8 +65,6 @@ export function createListingView() {
      id="image"
      name="image" 
     >
-    
-    <!-- Later on I will need to be able to accept an image here -->
 
     <button type="submit">Add listing</button>
     <h3 class="create-listing__message"></h3>

@@ -1,7 +1,7 @@
 import db from "./connection.js";
 
 export function dbCreateSession(sessionId, expiryTime) {
-  // expiryTime is a string to safely store large numbers without overflow
+  // ExpiryTime is a string to safely store large numbers without overflow
   db.prepare(
     "INSERT INTO sessions (sessionId, login, expiryTime) VALUES(?, ?, ?)",
   ).run(sessionId, false, expiryTime.toString());

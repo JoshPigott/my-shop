@@ -28,7 +28,7 @@ export function getListingsService(filters) {
       if (value === "ASC" || value === "DESC") {
         order.push(`price ${value}`);
       }
-    } // filter with WHERE
+    } // Filter with WHERE
     else {
       if (filtersAllowed.includes(key)) {
         conditions.push(`${key} = ?`);

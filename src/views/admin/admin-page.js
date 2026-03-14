@@ -45,6 +45,7 @@ export function adminPageView(loginStatus, listings) {
 `;
 }
 
+// Main veiw when login
 export function adminMainView(listings) {
   const html = /*html*/ `
   ${createListingView()}

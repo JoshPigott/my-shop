@@ -1,5 +1,6 @@
 import { listingView } from "../listing.js";
 
+// Wraps each listing in a div element for easier CSS styling
 function listingsView(listings) {
   if (listings.length === 0) return "";
 

@@ -20,7 +20,7 @@ export async function serveStaticFiles(req, pathname, subdomain) {
     return await serveFile(req, join(currworkingDir, "src/public/index.html"));
   }
 
-  // serves the static file
+  // Serves the static file
   if (await isFile(filepath)) {
     return await serveFile(req, filepath);
   } // There is no static file

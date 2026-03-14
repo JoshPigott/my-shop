@@ -6,7 +6,7 @@
 
 - Adding listings
 - A watch-list to check track of the listings
-- filters
+- filters (Not fully shipped yet)
 
 ## Requirements
 
@@ -15,7 +15,8 @@
 
 ## How to run
 
-- This will come later once I build the html
+- run `deno task` the terminal
+- type `http://localhost:8000/` in the browser
 
 ## Note for real estate agents
 
@@ -62,33 +63,38 @@
     ├── public
     │   ├── index.html
     │   ├── setup-session.js
+    │   ├── style.css
     │   ├── watchlist.html
     │   │
     │   └── assets
+    │       ├── favicon.png
+    │       ├── login-pic.jpg
+    │       │
     │       └── listings-pics
-    │           ├── bella-italia.jpg
-    │           ├── big-sky.jpg
-    │           ├── focal-point.jpg
-    │           ├── grandeur.jpg
-    │           ├── la-belle-vie.jpg
-    │           ├── lifestyle-collective.jpg
-    │           ├── maison-du-soleil.jpg
-    │           ├── safehaven.jpg
-    │           ├── sky-view.jpg
-    │           ├── substance.jpg
-    │           ├── the-beacon.jpg
-    │           ├── town-country.jpg
-    │           └── watercolours.jpg
+    │           ├── Bella_Italia-1773453498168.jpg
+    │           ├── Big_Sky-1773454110662.jpg
+    │           ├── Focal_Point-1773453784714.jpg
+    │           ├── Grandeur-1773454024283.jpg
+    │           ├── La_Belle_Vie-1773454137163.jpg
+    │           ├── Lifestyle_Collective-1773453942002.jpg
+    │           ├── Maison_du_Soleila-1773453918668.jpg
+    │           ├── Safehaven-1773454158341.jpg
+    │           ├── SkyView-1773453857656.jpg
+    │           ├── Substance-1773453824042.jpg
+    │           ├── The_Beacon-1773454060955.jpg
+    │           └── Watercolours-1773464328913.jpg
     │
     ├── routes
     │   └── index.js
     │
     ├── services
     │   ├── auth.js
+    │   ├── create-listing.js
     │   ├── get-listings.js
     │   └── sessions.js
     │
     ├── utils
+    │   ├── escape-html.js
     │   ├── html-response.js
     │   └── json.js
     │
@@ -97,12 +103,15 @@
         │
         ├── admin
         │   ├── admin-login.js
-        │   └── admin-page.js
+        │   ├── admin-page.js
+        │   ├── create-listing.js
+        │   └── delete-listings.js
+        │
+        ├── home
+        │   └── listings.js
         │
         ├── listings
-        │   ├── create-listing.js
-        │   ├── listings-page.js
-        │   └── listings.js
+        │   └── listings-page.js
         │
         └── watchlist
             └── watchlist-listing.js
@@ -122,7 +131,7 @@
 - Admin is accessed via a subdomain.
 - Users can sign up and log in.
 - After logging in, agents can create new property listings.
-- This feature is intended for real estate agents to add listings.
+- This feature is for real estate agents to add and delete listings.
 
 ## Watchlist
 
@@ -138,3 +147,8 @@
 ## Known Problems
 
 - Watchlists are session-based. When the session expires, the watchlist is lost.
+- When the session expires, using the same tab causes errors. A new tab must be
+  opened to start a new session.
+- Not all filter code is used.
+- Anyone can create an admin account if they know the username must start with
+  **agent** and use the admin subdomain.

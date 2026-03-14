@@ -1,7 +1,7 @@
 // deno-fmt-ignore-file
 
 import newSession from "../handlers/new-session.js";
-import { createListing, getListings, getListingPage, buy, deleteListings }from "../handlers/listings.js";
+import { createListing, getListings, getListingPage, deleteListings }from "../handlers/listings.js";
 import { addToWatchlist, getWatchlist, removeFromWatchlist } from "../handlers/watchlist.js";
 import { isValidPassword, newAccount } from "../handlers/account.js";
 import { adminPage } from "../handlers/admin.js";
@@ -23,7 +23,6 @@ const routingTablePublic = [
   {method: "POST",   path: "/create-session",                handler: newSession},
   {method: "GET",    path: "/get-listings",                  handler: getListings},
   {method: "GET",    path: "/get-listing-page/:listingId",   handler: getListingPage},
-  {method: "GET",    path: "/buy/:listingId",                handler: buy},
   {method: "POST",   path: "/watch-list-add/:listingId",     handler: addToWatchlist},
   {method: "GET",    path: "/watch-list-get",                handler: getWatchlist},
   {method: "DELETE", path: "/watch-list-delete/:listingId",  handler: removeFromWatchlist}, 

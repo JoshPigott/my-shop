@@ -1,3 +1,4 @@
+// Makes a requst to set up a new session only on first load
 async function isExistingSession() {
   const loadedBefore = sessionStorage.getItem("firstLoad");
   if (!loadedBefore) {

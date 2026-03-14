@@ -1,5 +1,6 @@
 import { listingFullView } from "../listing.js";
 
+// Renders watchlist listings with a button to remove listings
 function watchlistListingView(listings) {
   const html = listings.map((listing) =>
     /*html*/ ` 

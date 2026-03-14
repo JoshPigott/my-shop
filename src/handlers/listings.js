@@ -1,4 +1,4 @@
-import { dbBuy, dbDeleteListing, dbGetListing } from "../database/listings.js";
+import { dbDeleteListing, dbGetListing } from "../database/listings.js";
 import {
   dbDeleteListingsById,
   dbIsInWatchlist,
@@ -14,7 +14,7 @@ import htmlResponse from "../utils/html-response.js";
 export async function createListing(ctx) {
   const formData = await ctx.req.formData();
 
-  // listing info
+  // Listing info
   const id = crypto.randomUUID();
   const name = formData?.get("name") ?? "";
   const address = formData?.get("address") ?? "";
@@ -68,19 +68,7 @@ export function getListingPage(ctx) {
   return htmlResponse(html, { status: 200 });
 }
 
-// Buys the house
-export function buy(ctx) {
-  const listingId = ctx.params.listingId;
-  // Updated to state if you brought the house or not to void race condation
-  const updated = dbBuy(listingId);
-  if (updated === 1) {
-    return new Response("Transaction was successful", { status: 200 }); // Later on this will be htmx
-  } else {
-    console.log("Unable to buy the house");
-    return new Response("Unable to buy house", { status: 409 }); // Later on this will be htmx
-  }
-}
-
+// Deletes listings in watchlists, images of listings, and database
 export async function deleteListings(ctx) {
   const fileStoragePath = "./src/public/assets/listings-pics";
   const listingId = ctx.params.listingId;
