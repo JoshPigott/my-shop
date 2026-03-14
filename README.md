@@ -6,7 +6,6 @@
 
 - Adding listings
 - A watch-list to check track of the listings
-- A buy option
 - filters
 
 ## Requirements

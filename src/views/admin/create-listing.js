@@ -1,7 +1,7 @@
 export function createListingView() {
   return /*html*/ `
   <div class="create-listing">
-  <form class="create-listing__form" hx-post="/create-listing" hx-target=".create-listing__message">
+  <form class="create-listing__form" hx-post="/create-listing" hx-target=".create-listing__message" enctype="multipart/form-data">
     <label for="name">Name</label>
     <input
      type="text"
@@ -18,7 +18,7 @@ export function createListingView() {
      maxlength="35"
      >
 
-    <label for="area">area</label>
+    <label for="area">Area</label>
     <input
      type="text"
      id="area"
@@ -55,8 +55,16 @@ export function createListingView() {
      type="text"
      id="description"
      name="description"
-     required>
-    </textarea>
+     required
+    ></textarea>
+
+    <label for="image">Image</label>
+    <input 
+     type="file"
+     accept="image/jpeg"
+     id="image"
+     name="image" 
+    >
     
     <!-- Later on I will need to be able to accept an image here -->
 
